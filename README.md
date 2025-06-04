@@ -84,3 +84,11 @@ This project is intended to be packaged as an Android APK using Apache Cordova.
 ## License
 
 This project is licensed under the **MIT** license.
+
+## Disclaimer
+
+This project is intended for educational and learning purposes only.
+
+Some visual, audio, or conceptual assets used in this project may be subject to copyright held by third parties. No copyright infringement is intended, and all rights remain with their respective owners.
+
+Do not use this project for commercial purposes without ensuring you have the proper rights for all assets involved.

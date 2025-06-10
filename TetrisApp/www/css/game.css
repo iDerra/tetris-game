@@ -1,0 +1,153 @@
+
+/* Game content container (initially hidden) */
+#game-content {
+    display: none;
+}
+
+/* Styles for when the game content is active/visible */
+#game-content.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main container for the game area (board + level header) and the side panel */
+#main-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Container for the game board itself and the level display header above it */
+#game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header display for the current game level, positioned above the Tetris board */
+#level-header-display {
+    background-color: var(--side-panel-card-bg);
+    padding: 6px 10px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--side-panel-card-border);
+    border-bottom: none; 
+    text-align: center; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    box-sizing: border-box;
+    
+    /* CRITICAL: Sets width to match the Tetris canvas. */
+    width: calc(10 * 30px + 4px);
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+
+    /* --- Flexbox properties to align "LEVEL" and the number horizontally --- */
+    display: flex;
+    justify-content: center;
+    align-items: baseline; 
+    gap: 0.5em;
+}
+
+/* Styling for the "LEVEL" text (h4) within the level header display */
+#level-header-display h4 {
+    margin: 0; 
+    color: var(--text-color-medium); 
+    font-size: 1.1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+/* Styling for the level number (p#level-value-header) within the level header display */
+#level-header-display #level-value-header {
+    margin: 0;
+    color: var(--accent-color-primary);
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Main game canvas where Tetris pieces are drawn */
+#tetris-canvas {
+    display: block;
+    border: 2px solid var(--board-border);
+    background-color: var(--board-bg);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    border-radius: 0 0 8px 8px;
+}
+
+
+/* Side panel for displaying score, next piece, and instructions */
+#side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 200px;
+    padding-top: 0;
+}
+
+/* Common styling for cards within the side panel (score, next piece, instructions) */
+#score-container,
+#next-piece-preview,
+.instructions {
+    background-color: var(--side-panel-card-bg);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--side-panel-card-border);
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Titles within side panel cards */
+#score-container h4,
+#next-piece-preview h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-color-medium);
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Score value display */
+#score-value {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--accent-color-primary);
+    margin: 5px 0 10px 0;
+    line-height: 1;
+}
+
+/* Canvas for displaying the next piece preview */
+#next-piece-canvas {
+    display: block; 
+    margin: 10px auto 5px auto; 
+    background-color: var(--body-bg);
+    border: 1px solid var(--grid-color); 
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Container for game instructions */
+.instructions {
+    margin-top: 0;
+    font-size: 0.85em;
+    color: var(--text-color-light);
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 25px;
+}
+
+/* Adds a small space after <br> tags within the instructions for better separation */
+.instructions br {
+    display: block;
+    content: "";
+    margin-top: 4px;
+}

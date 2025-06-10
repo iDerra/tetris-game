@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TETRIS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/highscores.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="start-menu" class="menu-overlay active">
+        <div class="menu-content-wrapper">
+            <h1 data-i18n-key="tetrisTitle">TETRIS</h1>
+            <div class="menu-option">
+                <input type="checkbox" id="dynamic-speed-toggle" name="dynamic-speed-toggle" checked>
+                <label for="dynamic-speed-toggle" data-i18n-key="dynamicDescentLabel">Velocidad dinámica</label>
+            </div>
+            
+            <div class="menu-option theme-selector-container">
+                <label for="theme-selector" data-i18n-key="themeLabel">Tema:</label>
+                <select id="theme-selector" name="theme-selector"></select>
+            </div>
+
+            <div class="menu-option language-selector-container">
+                <label for="language-selector" data-i18n-key="languageLabel">Idioma:</label>
+                <select id="language-selector" name="language-selector">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+
+            <div class="mute-buttons-container">
+                <button id="toggle-music-start" class="menu-button icon-button" aria-label="Silenciar música">
+                    <span class="icon">🎵</span> <span class="label-sm" data-i18n-key="musicLabel">Música</span>
+                </button>
+                <button id="toggle-sfx-start" class="menu-button icon-button" aria-label="Silenciar sonidos">
+                    <span class="icon">🔊</span> <span class="label-sm" data-i18n-key="sfxLabel">Sonidos</span>
+                </button>
+            </div>
+
+            <button id="start-game-button" class="menu-button" data-i18n-key="startGameButton">Iniciar Juego</button>
+            <button id="high-scores-button" class="menu-button" data-i18n-key="highScoresButton">Mejores Puntuaciones</button>
+        </div>
+    </div>
+
+    <div id="pause-menu" class="menu-overlay"> <div class="menu-content-wrapper"> <h2 data-i18n-key="pauseTitle">Pausa</h2> <div class="mute-buttons-container">
+                <button id="toggle-music-pause" class="menu-button icon-button" aria-label="Silenciar música">
+                    <span class="icon">🎵</span> <span class="label-sm" data-i18n-key="musicLabel">Música</span>
+                </button>
+                <button id="toggle-sfx-pause" class="menu-button icon-button" aria-label="Silenciar sonidos">
+                    <span class="icon">🔊</span> <span class="label-sm" data-i18n-key="sfxLabel">Sonidos</span>
+                </button>
+            </div>
+
+            <button id="resume-game-button" class="menu-button" data-i18n-key="resumeButton">Continuar</button> <button id="restart-pause-button" class="menu-button" data-i18n-key="restartButton">Reiniciar Partida</button> <button id="main-menu-pause-button" class="menu-button" data-i18n-key="mainMenuButton">Menú Principal</button> </div>
+    </div>
+
+    <div id="game-over-menu" class="menu-overlay">
+        <div class="menu-content-wrapper">
+            <h2 data-i18n-key="gameOverTitle">Game Over</h2>
+            <p><span data-i18n-key="yourScoreLabel">Tu Puntuación:</span> <span id="current-game-score-value">0</span></p>
+            <p><span data-i18n-key="globalMaxScoreLabel">Máxima Global:</span> <span id="all-time-high-score-value">0</span></p>
+            <p id="new-high-score-message" class="highlight-message" style="display:none;" data-i18n-key="newHighScoreMsg">¡Nueva Máxima Puntuación en el Top 5!</p>
+            <button id="continue-after-game-over-button" class="menu-button" data-i18n-key="continueGameOverButton">Continuar</button>
+            <button id="restart-game-over-button" class="menu-button" data-i18n-key="restartButton">Reiniciar Partida</button> <button id="main-menu-game-over-button" class="menu-button" data-i18n-key="mainMenuButton">Menú Principal</button> </div>
+    </div>
+
+    <div id="high-scores-screen" class="menu-overlay">
+        <div class="menu-content-wrapper">
+            <h2 data-i18n-key="highScoresTitle">Mejores Puntuaciones</h2>
+            <ol id="high-scores-list">
+                </ol>
+            <button id="back-to-main-menu-hs-button" class="menu-button" data-i18n-key="backToMenuButton">Volver al Menú</button>
+        </div>
+    </div>
+
+    <div id="game-content">
+        <div id="main-container">
+            <div id="game-area">
+                <div id="level-header-display"> 
+                    <h4 data-i18n-key="levelLabelCaps">NIVEL</h4>
+                    <p id="level-value-header">0</p>
+                </div>
+                <canvas id="tetris-canvas"></canvas>
+            </div> <div id="side-panel">
+                <div id="score-container">
+                    <h4 data-i18n-key="scoreLabelCaps">PUNTUACIÓN</h4>
+                    <p id="score-value">0</p>
+                </div>
+                <div id="next-piece-preview">
+                    <h4 data-i18n-key="nextPieceLabelCaps">SIGUIENTE</h4>
+                    <canvas id="next-piece-canvas"></canvas>
+                </div>
+                <div class="instructions" data-i18n-key="instructionsText">
+                    P: Pausa<br>
+                    ↑ / W / X: Rotar<br>
+                    ← / A: Izquierda<br>
+                    → / D: Derecha<br>
+                    ↓ / S: Bajar<br>
+                    SPACE: Drop
+                </div>
+            </div>
+    </div> </div>
+
+    <audio id="backgroundMusicPlayer" loop>
+        <source src="audio/background_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="lineClearSound" preload="auto">
+        <source src="audio/line-clear.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="tetrisClearSound" preload="auto">
+        <source src="audio/tetris-clear.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="newHighScoreSound" preload="auto">
+        <source src="audio/new-highscore.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="gameOverSound" preload="auto">
+        <source src="audio/game-over.mp3" type="audio/mpeg">
+        Your browser does not spport the audio element.
+    </audio>
+
+    <audio id="buttonClickSound" preload="auto">
+        <source src="audio/button-click.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="js/core/constants.js"></script> 
+    <script src="js/services/audio.js"></script>
+    <script src="js/services/storage.js"></script>
+    <script src="js/services/localization.js"></script>
+    <script src="js/services/theme.js"></script>
+    <script src="js/services/scoreLevelManager.js"></script>
+    <script src="js/ui/drawingUtils.js"></script>
+    <script src="js/controls/controls.js"></script>
+
+    <script src="js/game/board.js"></script>
+    <script src="js/game/piece.js"></script>
+
+    <script src="js/ui/menu.js"></script>
+    <script src="js/core/main.js"></script>
+    
+
+    </body>
+</html>

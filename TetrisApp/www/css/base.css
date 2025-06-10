@@ -1,0 +1,70 @@
+/* Definition of global CSS variables with the default theme. */
+/* These variables allow dynamic theme changes via JavaScript. */
+/* The values here are for the 'classicDark' theme and serve as fallbacks if variables are not loaded correctly. */
+:root {
+    /* Base and background colors */
+    --body-bg: #1e293b;
+    --menu-overlay-bg: rgba(30, 41, 59, 0.85);
+    --menu-card-bg: rgba(51, 65, 85, 0.9);
+    --board-bg: #0f172a;
+    --side-panel-card-bg: rgba(51, 65, 85, 0.7);
+
+    /* Text colors */
+    --text-color-light: #e2e8f0;
+    --text-color-medium: #94a3b8;
+    --text-color-dark: #0f172a;
+
+    /* Primary and secondary accent colors */
+    --accent-color-primary: #f59e0b;
+    --accent-color-primary-hover: #d97706;
+    --accent-color-secondary-border: #f59e0b;
+    --accent-color-secondary-hover-bg: rgba(245, 158, 11, 0.1);
+    
+    /* Game element specific colors */
+    --board-border: #475569;
+    --grid-color: #334155;
+    --side-panel-card-border: rgba(71, 85, 105, 0.8);
+    --checkbox-accent: #f59e0b;
+}
+
+body {
+    /* Flexbox setup to center the main application content */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: 'Poppins', Arial, sans-serif;
+    color: var(--text-color-light);
+
+    touch-action: none;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    /* Styles for the body background image and color, controlled by theme variables */
+    background-color: var(--body-bg); 
+    background-image: var(--body-background-image, none);
+    background-size: var(--body-background-size, cover);
+    background-position: var(--body-background-position, center center);
+    background-repeat: var(--body-background-repeat, no-repeat);
+    background-attachment: var(--body-background-attachment, fixed);
+
+    position: relative;
+    z-index: 0;
+}
+
+/* Pseudo-element ::before to apply a color overlay on top of the background image. */
+/* This is useful for improving text and game element readability when using a complex background image. */
+body::before {
+    content: "";
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-background-overlay-color, transparent); 
+    z-index: -1; 
+    pointer-events: none;
+}

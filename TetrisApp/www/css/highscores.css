@@ -1,0 +1,60 @@
+/* Styles for the main heading on the high scores screen. */
+#high-scores-screen h2 {
+    margin-bottom: 30px;
+}
+
+/* Styles for the ordered list that displays the high scores. */
+#high-scores-list {
+    list-style: none; 
+    padding-left: 0; 
+    margin-bottom: 30px; 
+    font-size: 1.15em; 
+    color: var(--text-color-light); 
+    width: 100%; 
+    counter-reset: highscore-counter; 
+}
+
+/* Styles for individual high score list items (<li>). */
+#high-scores-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.7);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    position: relative;
+}
+
+/* Styles for the last list item in the high scores list. */
+#high-scores-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Styles for the ::before pseudo-element of each list item, used to display the rank number. */
+#high-scores-list li::before {
+    counter-increment: highscore-counter;
+    content: counter(highscore-counter) ". ";
+    font-weight: 600;
+    color: var(--accent-color-primary);
+    margin-right: 15px;
+    min-width: 25px; 
+    text-align: right; 
+    flex-shrink: 0;
+}
+
+/* Styles for the <span> element that contains the actual score value within each list item. */
+.score-value-entry {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Styles for the <span> element that contains the actual score value within each list item. */
+.no-scores-message {
+    justify-content: center; 
+    text-align: center;
+    font-style: italic;
+    color: var(--text-color-medium); 
+    padding: 15px 0;
+}

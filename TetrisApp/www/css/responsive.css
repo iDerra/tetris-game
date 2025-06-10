@@ -1,0 +1,262 @@
+/* Styles for screens with a maximum width of 768px (typically tablets and larger phones in landscape) */
+@media (max-width: 768px) {
+    /* Adjusts the main game container to stack elements vertically. */
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Ensures the active game content area uses flex to center its children on smaller screens. */
+    #game-content.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Adjusts the side panel for smaller screens. */
+    #side-panel {
+        width: 90%;
+        max-width: 320px;
+        flex-direction: row; 
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Score and next piece preview containers within the side panel. */
+    #score-container,
+    #next-piece-preview {
+        min-width: 130px;
+        flex-grow: 1;
+    }
+
+    /* Instructions text adjustments. */
+    .instructions {
+        width: 100%;
+        max-width: calc(100% - 20px);
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    /* Adjustments for menu elements on smaller screens. */
+    .menu-overlay h1 {
+        font-size: 2.5em;
+    }
+    .menu-overlay h2 {
+        font-size: 1.8em;
+    }
+    .menu-button {
+        padding: 12px 20px; 
+        font-size: 0.9em;
+        min-width: 180px;
+        margin: 8px;
+    }
+
+    /* High scores list adjustments. */
+    #high-scores-list {
+        font-size: 1em;
+        width: 95%;
+    }
+}
+
+
+/* Styles for very small screens (max-width: 400px), typically smaller phones. */
+@media (max-width: 400px) {
+    #side-panel {
+        flex-direction: column; 
+        align-items: center;
+    }
+    #score-container,
+    #next-piece-preview {
+        width: 80%;
+    }
+    .menu-button {
+        width: 90%;
+        min-width: unset;
+        padding: 12px;
+    }
+}
+
+/* ==========================================================================
+            NEW STYLES SPECIFICALLY FOR MOBILE (PORTRAIT ORIENTATION)
+            These rules apply when the device is held vertically.
+   ========================================================================== */
+@media (orientation: portrait) {
+
+    /* Reduces overall body padding in portrait mode. */
+    body {
+        padding: 5px;
+    }
+
+    /* Reduces padding for menu overlays in portrait mode. */
+    .menu-overlay {
+        padding: 10px;
+    }
+
+    /* Adjusts the menu content wrapper for portrait mode. */
+    .menu-content-wrapper {
+        width: 80%; 
+        padding: 20px 15px; 
+        max-height: 90vh; 
+        overflow-y: auto; 
+    }
+
+    /* Font size adjustments for menu titles in portrait. */
+    .menu-overlay h1 {
+        font-size: 2.2em; 
+        margin-bottom: 15px;
+    }
+    .menu-overlay h2 {
+        font-size: 1.7em;
+        margin-bottom: 15px;
+    }
+    .menu-overlay p {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+
+    /* Menu button adjustments for portrait mode. */
+    .menu-button {
+        padding: 12px 10px; 
+        font-size: 0.9em;
+        min-width: 0;    
+        width: 100%;     
+        margin: 8px 0;   
+    }
+    .menu-button + .menu-button { 
+        margin-top: 10px;
+    }
+
+    /* Styles for menu options (like checkbox containers) in portrait. */
+    .menu-option {
+        font-size: 0.9em;
+        display: flex; 
+        flex-direction: row; 
+        justify-content: center; 
+        align-items: center; 
+        gap: 8px; 
+        margin-bottom: 20px; 
+    }
+
+    /* Theme and language selector containers stack vertically in portrait. */
+    .theme-selector-container,
+    .language-selector-container {
+        flex-direction: column; 
+        align-items: stretch;   
+        gap: 8px;
+    }
+
+    /* Select dropdowns take full width in portrait. */
+    #theme-selector,
+    #language-selector {
+        width: 100%; 
+        padding: 12px 35px 12px 15px; 
+        font-size: 1em;
+    }
+
+    /* High scores list adjustments for portrait. */
+    #high-scores-list {
+        font-size: 1em;
+        padding-left: 10px; 
+    }
+    #high-scores-list li {
+        padding: 8px 10px;
+    }
+    #high-scores-list li::before {
+        margin-right: 8px; 
+        min-width: 20px;
+    }
+
+    /* Main game container adjustments for portrait. */
+    #main-container {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;    
+        gap: 10px;      
+        padding: 5px;
+    }
+
+    /* Game area (board + level header) adjustments for portrait. */
+    #game-area {
+        order: 2; 
+        width: 100%; 
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Level header display specific adjustments for portrait if needed */
+    #level-header-display {
+        width: 100%;
+        max-width: 66vw;
+    }
+
+    /* Tetris canvas adjustments for portrait. */
+    #tetris-canvas {
+        max-width: 65vw;
+        height: auto;   
+        display: block;
+    }
+
+    /* Side panel adjustments for portrait. */
+    #side-panel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap; 
+        justify-content: space-around; 
+        align-items: stretch; 
+        width: 90%;
+        max-width: 400px;
+        gap: 15px;
+        margin-right: 15px;
+        order: 1;
+        margin-bottom: 10px;
+        padding-top: 0;
+    }
+
+    /* Score and next piece containers in portrait. */
+    #score-container,
+    #next-piece-preview {
+        flex-grow: 1; 
+        flex-shrink: 1; 
+        flex-basis: 0; 
+        padding: 10px; 
+        box-sizing: border-box; 
+        height: auto; 
+        min-height: 50px; 
+        min-width: 120px;
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center;
+    }
+
+    /* Text inside score and next piece containers in portrait. */
+    #score-container h4,
+    #next-piece-preview h4 {
+        font-size: 0.8em;
+        margin-top: 0; 
+        margin-bottom: 5px;
+    }
+    #score-value {
+        font-size: 2.5em;
+        line-height: 1.1; 
+    }
+
+    /* Next piece canvas in portrait. */
+    #next-piece-canvas {
+        display: block; 
+        width: 80px; 
+        height: 80px; 
+        margin: 5px auto;
+    }
+
+    /* Instructions are hidden in portrait mode. */
+    .instructions {
+        display: none !important; 
+    }
+    .instructions br { /* Though instructions are hidden, keep style for consistency if shown elsewhere. */
+        margin-top: 2px; 
+    }
+}
